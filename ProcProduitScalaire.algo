@@ -1,17 +1,17 @@
-PROCEDURE dot_product (VAR o,p : ARRAY_OF INTEGER[];)
+PROCEDURE dot_product (o,p : ARRAY_OF INTEGER[], VAR verif : BOOLEAN )
 VAR
     sum : INTEGER := 0;
     i : INTEGER;
-    verif : BOOLEAN;
+    
 BEGIN
     FOR i FROM 1 TO o.length STEP 1  DO
         sum := sum + o[i]*p[i];
     END_FOR
 
     IF (sum = 0) THEN
-        RETURN verif := TRUE;
+        verif := TRUE;
     ELSE
-        RETURN verif := FALSE; 
+        verif := FALSE; 
     END_IF
 
 END
@@ -23,15 +23,10 @@ VAR
     v2 : ARRAY_OF INTEGER[] := [4,5];
     resultat : BOOLEAN;
 BEGIN
-    IF (v1.length <> v2.length OR v1.length < 2 OR v1.length > 3) THEN
-
-        Write("On ne peut pas calculer le produit scalaire.");
+    dot_product(v1,v2,resultat);
+    IF (resultat = TRUE) THEN
+        Write ("les vecteurs est orthogonaux");
     ELSE
-        resultat := dot_product(v1,v2);
-        IF (resultat = TRUE) THEN
-            Write ("les vecteurs est orthogonaux");
-        ELSE
-            Write("les vecteurs n''est pas orthogonaux");
-        END_IF
+        Write("les vecteurs n''est pas orthogonaux");
     END_IF
 END
